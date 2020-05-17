@@ -1,53 +1,13 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
 import {
-  BookOutlined,
   LocationOnOutlined,
   LinkOutlined,
   EmailOutlined,
-  AssessmentOutlined,
-  Person,
 } from "@material-ui/icons";
-import { useStyles } from "./styles";
-import packageIcon from "../../assets/caixa.svg";
-interface Props {}
+import { TabNavigator } from "./TabNavigator";
 
-const TabNavigator = () => {
-  const classes = useStyles();
-  return (
-    <div className={classes.tabContainer}>
-      <div className={classes.tabItemSelected}>
-        <div className={classes.tabItemSelectedDivider} />
-        <Typography className={classes.tabItemSelectedContent}>
-          <BookOutlined className={classes.icon} />
-          Repositories
-          <div className={classes.tabItemBadge}>115</div>
-        </Typography>
-      </div>
-      <div className={classes.tabItemUnSelected}>
-        <Typography className={classes.tabItemUnSelectedContent}>
-          <img
-            src={packageIcon}
-            style={{ height: 18, width: 18, marginRight: 4 }}
-          ></img>
-          Packages
-        </Typography>
-      </div>
-      <div className={classes.tabItemUnSelected}>
-        <Typography className={classes.tabItemUnSelectedContent}>
-          <Person className={classes.icon} />
-          People
-        </Typography>
-      </div>
-      <div className={classes.tabItemUnSelected}>
-        <Typography className={classes.tabItemUnSelectedContent}>
-          <AssessmentOutlined className={classes.icon} />
-          Projects
-        </Typography>
-      </div>
-    </div>
-  );
-};
+interface Props {}
 
 const Content = (props: Props) => {
   return (
@@ -61,6 +21,7 @@ const Content = (props: Props) => {
         width: "100%",
         borderBottomWidth: "2px",
         borderColor: "#FFF",
+        marginBottom: 20
       }}
     >
       <div
@@ -82,7 +43,6 @@ const Content = (props: Props) => {
             flexDirection: "column",
             justifyContent: "space-between",
             marginLeft: 20,
-
             height: 80,
           }}
         >
