@@ -1,12 +1,19 @@
 import React from "react";
 import logo from "../../assets/github-logo-white.svg";
-import { AppBar, InputBase, Avatar, Toolbar, IconButton } from "@material-ui/core";
+import {
+  AppBar,
+  InputBase,
+  Avatar,
+  Toolbar,
+  IconButton,
+} from "@material-ui/core";
 import { Notifications, ArrowDropDown } from "@material-ui/icons";
 import { useStyles } from "./styles";
 interface Props {}
 
 const NavBar = (props: Props) => {
   const classes = useStyles();
+
   return (
     <>
       <AppBar className={classes.appBar}>

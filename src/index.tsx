@@ -4,11 +4,15 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { CssBaseline } from "@material-ui/core";
+import store from "./store";
+import { StoreProvider } from "easy-peasy";
 
 ReactDOM.render(
   <React.StrictMode>
     <CssBaseline />
-    <App />
+    <StoreProvider store={store}>
+      <App />
+    </StoreProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -1,15 +1,18 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
-import {
-  LocationOnOutlined,
-  LinkOutlined,
-  EmailOutlined,
-} from "@material-ui/icons";
+import { LocationOnOutlined, LinkOutlined, EmailOutlined } from "@material-ui/icons";
 import { TabNavigator } from "./TabNavigator";
+import { useStoreState } from "../../store";
 
 interface Props {}
 
 const Header = (props: Props) => {
+  const name = useStoreState((state) => state.gitHub.name);
+  const location = useStoreState((state) => state.gitHub.location);
+  const blog = useStoreState((state) => state.gitHub.blog);
+  const avatar_url = useStoreState((state) => state.gitHub.avatar_url);
+  const email = useStoreState((state) => state.gitHub.name);
+
   return (
     <div
       style={{
@@ -34,9 +37,8 @@ const Header = (props: Props) => {
           height: 120,
         }}
       >
-        <div
-          style={{ backgroundColor: "orange", height: 100, width: 100 }}
-        ></div>
+        <img alt="avatar" src={avatar_url} style={{ height: 100, width: 100 }} />
+
         <div
           style={{
             display: "flex",
@@ -46,7 +48,7 @@ const Header = (props: Props) => {
             height: 80,
           }}
         >
-          <Typography variant="h6">Camunda BPM</Typography>
+          <Typography variant="h6">{name}</Typography>
           <div style={{ display: "flex", flexDirection: "row" }}>
             <Typography
               style={{
@@ -56,7 +58,8 @@ const Header = (props: Props) => {
                 fontSize: 12,
               }}
             >
-              <LocationOnOutlined style={{ height: 16 }} /> Berlin
+              <LocationOnOutlined style={{ height: 16 }} />
+              {location}
             </Typography>
             <Typography
               style={{
@@ -66,7 +69,8 @@ const Header = (props: Props) => {
                 fontSize: 12,
               }}
             >
-              <LinkOutlined style={{ height: 16 }} /> http://www.camunda.org
+              <LinkOutlined style={{ height: 16 }} />
+              {blog}
             </Typography>
             <Typography
               style={{
@@ -76,7 +80,8 @@ const Header = (props: Props) => {
                 fontSize: 12,
               }}
             >
-              <EmailOutlined style={{ height: 16 }} /> info@camunda.com
+              <EmailOutlined style={{ height: 16 }} />
+              {email}
             </Typography>
           </div>
         </div>
