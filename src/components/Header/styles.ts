@@ -2,65 +2,59 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    appBar: {
+    tabContainer: {
+      margin: "0px 23% 0px 23%",
       display: "flex",
-      padding: "8px 16px",
-      backgroundColor: "#24292e",
       flexDirection: "row",
-      justifyContent: "space-between",
+      backgroundColor: "#f1f1f1",
     },
-    navigation: {
-      alignItems: "center",
+    tabItemUnSelected: {
       display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "#f1f1f1",
+      width: 150,
+      height: 45,
     },
-
-    logo: {
-      width: 32,
-      height: 32,
-      margin: "0px 16px 0px 0px",
-      "&:hover": {
-        opacity: "50%",
-      },
+    tabItemUnSelectedContent: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      fontSize: 14,
+      padding: "7.5px 0px 7.5px 0px",
+      justifyContent: "space-around",
+      color: "#586069",
     },
-    inputRoot: {
-      color: "inherit",
-      margin: "0px 16px 0px 0px",
+    tabItemSelected: {
+      display: "flex",
+      flexDirection: "column",
+      backgroundColor: "#f1f1f1",
+      width: 150,
+      height: 45,
+      justifyContent: "space-between",
+      border: "1px solid #e5e8eb",
+      borderBottom: 0,
     },
-
-    inputInput: {
-      backgroundColor: "#404448",
-      height: 28,
-      padding: "0px 8px 0px 8px",
-      borderRadius: 3,
-      transition: theme.transitions.create("width"),
-
-      width: 300,
-      "&:focus": {
-        width: 478,
-      },
-    },
-
-    link: {
-      color: "white",
-      margin: "0px 16px 0px 0px",
+    tabItemSelectedContent: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      backgroundColor: "white",
       fontSize: 14,
       fontWeight: 600,
-      "&:hover": {
-        opacity: "50%",
-      },
+      padding: "7.5px 0px 7.5px 0px",
+      justifyContent: "space-around",
     },
-    profile: {
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "space-between",
-      width: 120,
+    tabItemSelectedDivider: { backgroundColor: "#E36209", height: 4 },
+    tabItemBadge: {
+      fontSize: 12,
+      backgroundColor: "#EDEDED",
+      borderRadius: 7.35,
+      padding: "2px 5px",
     },
     icon: {
-      padding: 0,
-      color: "white",
-      "&:hover": {
-        opacity: "50%",
-      },
+      height: 18,
+      width: 18,
     },
   })
 );
