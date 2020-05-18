@@ -85,7 +85,7 @@ const gitHubModel: GitHubModel = {
     const { login, type } = payload;
     const response = await axios.get(`https://api.github.com/${type === "Organization" ? "orgs" : "users"}/${login}/repos`, {
       headers: {
-        Authorization: "token ab343c3f8d044401a98ce84a9641432c2e00256e",
+        Authorization: "token 3268920299cd7bd5b62adc88d90503338e49e1f9",
       },
       params: {
         sort: "updated",
@@ -98,7 +98,7 @@ const gitHubModel: GitHubModel = {
     const { setAvatarUrl, setBlog, setEmail, setLocation, setLogin, setName, setPublicRepos, setType } = actions;
     const response = await axios.get(`https://api.github.com/users/${payload}`, {
       headers: {
-        Authorization: "token ab343c3f8d044401a98ce84a9641432c2e00256e",
+        Authorization: "token 3268920299cd7bd5b62adc88d90503338e49e1f9",
       },
     });
     const { name, login, avatar_url, location, blog, email, public_repos, type } = response.data;
