@@ -16,7 +16,9 @@ const CardRepoContent: React.FC<CardRepoContentProps> = (props) => {
   const classes = useStyles();
   return (
     <div className={classes.cardRepoContent}>
-      <Typography variant="h6" style={{color: "#0366D6"}} >camunda-bpm-platform</Typography>
+      <Typography variant="h6" style={{ color: "#0366D6" }}>
+        camunda-bpm-platform
+      </Typography>
       <p>Flexible framework for workflow and decision automation with BPMN and DMN. Integration with Spring, Spring Boot, CDI.</p>
       <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-start", flexWrap: "wrap" }}>
         {["java", "workflow", "bpmn", "bpm", "camunda-bpm-platform", "process-engine", "camunda-engine"].map((tag) => (
@@ -42,31 +44,31 @@ const CardRepo: React.FC<CardRepoProps> = (props) => {
         <CardRepoImage></CardRepoImage>
       </div>
       <div className={classes.cardRepoFooter}>
-        <div style={{display:'flex',alignItems: 'center' ,backgroundColor: 'white', fontSize: 12, marginRight:5 }}>
+        <div style={{ display: "flex", alignItems: "center", backgroundColor: "white", fontSize: 12, marginRight: 5 }}>
           <BookOutlined className={classes.icon} />
           language
         </div>
-        <div style={{display:'flex',alignItems: 'center' ,backgroundColor: 'white', fontSize: 12, marginRight:5 }}>
+        <div style={{ display: "flex", alignItems: "center", backgroundColor: "white", fontSize: 12, marginRight: 5 }}>
           <BookOutlined className={classes.icon} />
           license
         </div>
-        <div style={{display:'flex',alignItems: 'center' ,backgroundColor: 'white', fontSize: 12, marginRight:5 }}>
+        <div style={{ display: "flex", alignItems: "center", backgroundColor: "white", fontSize: 12, marginRight: 5 }}>
           <BookOutlined className={classes.icon} />
           members
         </div>
-        <div style={{display:'flex',alignItems: 'center' ,backgroundColor: 'white', fontSize: 12, marginRight:5 }}>
+        <div style={{ display: "flex", alignItems: "center", backgroundColor: "white", fontSize: 12, marginRight: 5 }}>
           <BookOutlined className={classes.icon} />
           stargazers
         </div>
-        <div style={{display:'flex',alignItems: 'center' ,backgroundColor: 'white', fontSize: 12, marginRight:5 }}>
+        <div style={{ display: "flex", alignItems: "center", backgroundColor: "white", fontSize: 12, marginRight: 5 }}>
           <BookOutlined className={classes.icon} />
           issues
         </div>
-        <div style={{display:'flex',alignItems: 'center' ,backgroundColor: 'white', fontSize: 12, marginRight:5 }}>
+        <div style={{ display: "flex", alignItems: "center", backgroundColor: "white", fontSize: 12, marginRight: 5 }}>
           <BookOutlined className={classes.icon} />
           pulls
         </div>
-        <div style={{display:'flex',alignItems: 'center' ,backgroundColor: 'white', fontSize: 12, marginRight:5 }}>
+        <div style={{ display: "flex", alignItems: "center", backgroundColor: "white", fontSize: 12, marginRight: 5 }}>
           <BookOutlined className={classes.icon} />
           last updated
         </div>
@@ -90,9 +92,9 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100%",
       alignItems: "flex-start",
     },
-    cardRepoContent: {  flex: 3, marginRight: 10 },
-    cardRepoImage: {  height: "100%", flex: 1.25 },
-    cardRepoFooter: {  display:'flex', flexDirection: 'row', height: 25, width: "100%",  },
+    cardRepoContent: { flex: 3, marginRight: 10 },
+    cardRepoImage: { height: "100%", flex: 1.25 },
+    cardRepoFooter: { display: "flex", flexDirection: "row", height: 25, width: "100%" },
     cardRepoTag: {
       display: "flex",
       alignItems: "center",

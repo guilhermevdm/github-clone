@@ -9,6 +9,8 @@ export interface GitHubModel {
   email?: string;
   public_repos?: number;
   blog?: string;
+  type?: string;
+  repos?: any[];
 
   //actions
   setLogin: Action<GitHubModel, string>;
@@ -18,11 +20,15 @@ export interface GitHubModel {
   setEmail: Action<GitHubModel, string>;
   setPublicRepos: Action<GitHubModel, number>;
   setBlog: Action<GitHubModel, string>;
+  setType: Action<GitHubModel, string>;
   setProperty: Action<
     GitHubModel,
     { property: "login" | "name" | "avatar_url" | "location" | "email" | "public_repos" | "blog"; value: string | number }
   >;
+  setRepos: Action<GitHubModel, any[]>;
+  //thunks
   loadGitHubUserInfo: Thunk<GitHubModel, string>;
+  loadGitHubUserRepos: Thunk<GitHubModel, string>;
 }
 
 const gitHubModel: GitHubModel = {
@@ -34,6 +40,7 @@ const gitHubModel: GitHubModel = {
   email: "",
   public_repos: 0,
   blog: "",
+  repos: [],
 
   setLogin: action((state, payload) => {
     state.login = payload;
@@ -56,16 +63,27 @@ const gitHubModel: GitHubModel = {
   setBlog: action((state, payload) => {
     state.blog = payload;
   }),
+  setType: action((state, payload) => {
+    state.type = payload;
+  }),
   setProperty: action((state, payload) => {
     //@ts-ignore
     state[payload.property] = payload.value;
   }),
+  setRepos: action((state, payload) => {
+    state.repos = payload;
+  }),
 
   //thunks
+  loadGitHubUserRepos: thunk(async (actions, payload) => {
+    const { setRepos } = actions;
+    const response = await axios.get(`https://api.github.com/${payload === "Organization" ? "orgs" : "users"}/${payload}/repos`);
+    setRepos(response.data);
+  }),
   loadGitHubUserInfo: thunk(async (actions, payload) => {
-    const { setAvatarUrl, setBlog, setEmail, setLocation, setLogin, setName, setPublicRepos } = actions;
+    const { setAvatarUrl, setBlog, setEmail, setLocation, setLogin, setName, setPublicRepos, setType } = actions;
     const response = await axios.get(`https://api.github.com/users/${payload}`);
-    const { name, login, avatar_url, location, blog, email, public_repos } = response.data;
+    const { name, login, avatar_url, location, blog, email, public_repos, type } = response.data;
 
     setLogin(login);
     setName(name);
@@ -74,6 +92,9 @@ const gitHubModel: GitHubModel = {
     setPublicRepos(public_repos);
     setEmail(email);
     setLocation(location);
+    setType(type);
+
+    actions.loadGitHubUserRepos(type);
   }),
 };
 
