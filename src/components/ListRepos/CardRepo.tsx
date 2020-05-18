@@ -48,7 +48,7 @@ const CardRepo: React.FC<CardRepoProps> = ({ repo }) => {
       .get(`https://api.github.com/repos/${repo.owner.login}/${repo.name}/topics`, {
         headers: {
           Accept: "application/vnd.github.mercy-preview+json",
-          Authorization: "token 3268920299cd7bd5b62adc88d90503338e49e1f9",
+          Authorization: "token e2d3546389a0c98495a0a0b0fcee4ba431f2757b",
         },
       })
       .then((res) => setTopics(res.data));
