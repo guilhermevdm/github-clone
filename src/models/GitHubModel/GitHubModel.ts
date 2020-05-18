@@ -11,6 +11,7 @@ export interface GitHubModel {
   blog?: string;
   type?: string;
   repos?: any[];
+  userData?: any;
 
   //actions
   setLogin: Action<GitHubModel, string>;
@@ -21,6 +22,7 @@ export interface GitHubModel {
   setPublicRepos: Action<GitHubModel, number>;
   setBlog: Action<GitHubModel, string>;
   setType: Action<GitHubModel, string>;
+  setUserData: Action<GitHubModel, any>;
   setProperty: Action<
     GitHubModel,
     { property: "login" | "name" | "avatar_url" | "location" | "email" | "public_repos" | "blog"; value: string | number }
@@ -28,7 +30,7 @@ export interface GitHubModel {
   setRepos: Action<GitHubModel, any[]>;
   //thunks
   loadGitHubUserInfo: Thunk<GitHubModel, string>;
-  loadGitHubUserRepos: Thunk<GitHubModel, string>;
+  loadGitHubUserRepos: Thunk<GitHubModel, { login: string; type: string }>;
 }
 
 const gitHubModel: GitHubModel = {
@@ -73,16 +75,32 @@ const gitHubModel: GitHubModel = {
   setRepos: action((state, payload) => {
     state.repos = payload;
   }),
+  setUserData: action((state, payload) => {
+    state.userData = payload;
+  }),
 
   //thunks
   loadGitHubUserRepos: thunk(async (actions, payload) => {
     const { setRepos } = actions;
-    const response = await axios.get(`https://api.github.com/${payload === "Organization" ? "orgs" : "users"}/${payload}/repos`);
+    const { login, type } = payload;
+    const response = await axios.get(`https://api.github.com/${type === "Organization" ? "orgs" : "users"}/${login}/repos`, {
+      headers: {
+        Authorization: "token ab343c3f8d044401a98ce84a9641432c2e00256e",
+      },
+      params: {
+        sort: "updated",
+      },
+    });
+    console.log("response", response);
     setRepos(response.data);
   }),
   loadGitHubUserInfo: thunk(async (actions, payload) => {
     const { setAvatarUrl, setBlog, setEmail, setLocation, setLogin, setName, setPublicRepos, setType } = actions;
-    const response = await axios.get(`https://api.github.com/users/${payload}`);
+    const response = await axios.get(`https://api.github.com/users/${payload}`, {
+      headers: {
+        Authorization: "token ab343c3f8d044401a98ce84a9641432c2e00256e",
+      },
+    });
     const { name, login, avatar_url, location, blog, email, public_repos, type } = response.data;
 
     setLogin(login);
@@ -93,8 +111,9 @@ const gitHubModel: GitHubModel = {
     setEmail(email);
     setLocation(location);
     setType(type);
+    actions.setUserData(response.data);
 
-    actions.loadGitHubUserRepos(type);
+    actions.loadGitHubUserRepos({ login, type });
   }),
 };
 

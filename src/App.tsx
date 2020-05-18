@@ -17,7 +17,7 @@ function InnerApp() {
     <div style={{ height: 900 }}>
       <NavBar></NavBar>
       <Header></Header>
-      {/* <PinnedItems></PinnedItems> */}
+      <PinnedItems></PinnedItems>
       <ListRepos></ListRepos>
     </div>
   );
