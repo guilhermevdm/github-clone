@@ -1,17 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Typography } from "@material-ui/core";
-import { useStoreState, useStoreActions } from "../../store";
-
+import { useStoreState,  } from "../../store";
 interface Props {}
 
 const PinnedItems = (props: Props) => {
-  const setGitHubState = useStoreActions((actions) => actions.gitHub.setProperty);
-
   const gitHubState = useStoreState((state) => state.gitHub);
-
-  useEffect(() => {
-    setGitHubState({property:"login", value: "aiusdhiudhasui"});
-  }, [setGitHubState]);
 
   return (
     <div

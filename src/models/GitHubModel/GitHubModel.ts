@@ -1,5 +1,5 @@
-import { action, Action } from "easy-peasy";
-
+import { action, Action, Thunk, thunk } from "easy-peasy";
+import axios from "axios";
 export interface GitHubModel {
   //state
   login?: string;
@@ -22,17 +22,18 @@ export interface GitHubModel {
     GitHubModel,
     { property: "login" | "name" | "avatar_url" | "location" | "email" | "public_repos" | "blog"; value: string | number }
   >;
+  loadGitHubUserInfo: Thunk<GitHubModel, string>;
 }
 
 const gitHubModel: GitHubModel = {
   // state
-  login: "camunda",
-  name: "Camunda BPM",
-  avatar_url: "https://avatars3.githubusercontent.com/u/2443838?v=4",
-  location: "Berlin",
-  email: "info@camunda",
-  public_repos: 115,
-  blog: "http://www.camunda.org",
+  login: "",
+  name: "",
+  avatar_url: "",
+  location: "",
+  email: "",
+  public_repos: 0,
+  blog: "",
 
   setLogin: action((state, payload) => {
     state.login = payload;
@@ -58,6 +59,21 @@ const gitHubModel: GitHubModel = {
   setProperty: action((state, payload) => {
     //@ts-ignore
     state[payload.property] = payload.value;
+  }),
+
+  //thunks
+  loadGitHubUserInfo: thunk(async (actions, payload) => {
+    const { setAvatarUrl, setBlog, setEmail, setLocation, setLogin, setName, setPublicRepos } = actions;
+    const response = await axios.get(`https://api.github.com/users/${payload}`);
+    const { name, login, avatar_url, location, blog, email, public_repos } = response.data;
+
+    setLogin(login);
+    setName(name);
+    setAvatarUrl(avatar_url);
+    setBlog(blog);
+    setPublicRepos(public_repos);
+    setEmail(email);
+    setLocation(location);
   }),
 };
 

@@ -6,12 +6,15 @@ import * as serviceWorker from "./serviceWorker";
 import { CssBaseline } from "@material-ui/core";
 import store from "./store";
 import { StoreProvider } from "easy-peasy";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
     <CssBaseline />
     <StoreProvider store={store}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </StoreProvider>
   </React.StrictMode>,
   document.getElementById("root")
